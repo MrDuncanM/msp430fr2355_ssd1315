@@ -38,5 +38,10 @@ void module_print_menu(void);
  */
 ModRet run_menu(void);
 ModRet run_contrast(void);
+ModRet run_inverse(void);
+ModRet run_all_on(void);
+ModRet run_on_off(void);
+ModRet run_h_scroll(void);
+ModRet run_vh_scroll(void);
 
 #endif /* MODULE_H_ */

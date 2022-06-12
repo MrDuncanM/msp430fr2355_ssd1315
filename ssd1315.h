@@ -112,6 +112,7 @@
 
 // Set COM Pins Hardware Configuration
 #define SSD1315_SET_COM_PINS_CONF           0xDA
+// TODO: Values?
 
 // Set Vcomh Select Level
 #define SSD1315_SET_VCOM_LEVEL              0xDB
@@ -140,7 +141,8 @@
  * Commands For Scrolling
  */
 
-#define SSD1315_DUMMY_BYTE                  0x0
+#define SSD1315_DUMMY_BYTE_L                0x0
+#define SSD1315_DUMMY_BYTE_H                0xFF
 
 // Continuous Horizontal Scroll Setup
 #define SSD1315_SET_HORZ_SCROLL_RIGHT       0x26
@@ -149,6 +151,10 @@
 // Continuous Vertical & Horizontal Scroll
 #define SSD1315_SET_VH_SCROLL_URIGHT        0x29
 #define SSD1315_SET_VH_SCROLL_ULEFT         0x2A
+
+// VH Column Scroll
+#define SSD1315_VH_COL_SCR_NONE             0x0
+#define SSD1315_VH_COL_SCR_ONE              0x1
 
 // Stop/Start Scrolling
 #define SSD1315_STOP_SCROLL                 0x2E
@@ -163,13 +169,13 @@
 
 // Scroll Step Time Intervals (In terms of frame frequency)
 #define SSD1315_2_FRAME_SCROLL              0x7
-#define SSD2315_3_FRAME_SCROLL              0x4
-#define SSD2315_4_FRAME_SCROLL              0x5
-#define SSD2315_5_FRAME_SCROLL              0x6
-#define SSD2315_6_FRAME_SCROLL              0x0
-#define SSD2315_32_FRAME_SCROLL             0x1
-#define SSD2315_64_FRAME_SCROLL             0x2
-#define SSD2315_128_FRAME_SCROLL            0x3
+#define SSD1315_3_FRAME_SCROLL              0x4
+#define SSD1315_4_FRAME_SCROLL              0x5
+#define SSD1315_5_FRAME_SCROLL              0x6
+#define SSD1315_6_FRAME_SCROLL              0x0
+#define SSD1315_32_FRAME_SCROLL             0x1
+#define SSD1315_64_FRAME_SCROLL             0x2
+#define SSD1315_128_FRAME_SCROLL            0x3
 
 /*
  * Commands for Fade / Blink
@@ -218,6 +224,7 @@ void ssd1315_command(unsigned char);
 void ssd1315_clear(void);
 void ssd1315_position(uint8_t, uint8_t);
 void ssd1315_print(uint8_t, uint8_t, char*);
+void ssd1315_uint32(uint8_t, uint8_t, uint32_t);
 
 #endif /* SSD1315_H_ */
 

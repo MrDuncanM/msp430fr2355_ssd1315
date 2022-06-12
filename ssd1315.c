@@ -32,7 +32,7 @@ void ssd1315_init(void) {
     ssd1315_command(SSD1315_SET_COM_PINS_CONF);                         // 0xDA
     ssd1315_command(0x12);
     ssd1315_command(SSD1315_SET_CONTRAST);                              // 0x81
-    ssd1315_command(0xCF);
+    ssd1315_command(SSD1315_DEFAULT_CONTRAST);
 
     ssd1315_command(SSD1315_SET_PRECHARGE_PERIOD);                      // 0xd9
     ssd1315_command(0xF1);
@@ -105,4 +105,40 @@ void ssd1315_print(uint8_t column, uint8_t page, char* str) {
         i2c_write(SSD1315_I2C_ADDRESS, SSD1315_BUFFER, 7);
         ++str;
     }
+}
+
+void reverse(char *s)
+{
+    uint8_t i, j;
+    uint8_t c;
+
+    for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
+} // end reverse
+
+void ultoa(uint32_t val, char *string) {
+    uint8_t i = 0;
+    uint8_t j = 0;
+                                                                        // use do loop to convert val to string
+    do {
+        if (j==3) {                                                     // we have reached a separator position
+            string[i++] = ',';                                          // add a separator to the number string
+            j=0;                                                        // reset separator indexer thingy
+        }
+            string[i++] = val%10 + '0';                                 // add the ith digit to the number string
+            j++;                                                        // increment counter to keep track of separator placement
+    } while ((val/=10) > 0);
+
+    string[i++] = '\0';                                                 // add termination to string
+    reverse(string);                                                    // string was built in reverse, fix that
+} // end ultoa
+
+void ssd1315_uint32(uint8_t column, uint8_t page, uint32_t val) {
+    char text[14];
+
+    ultoa(val, text);
+    ssd1315_print(column, page, text);
 }
