@@ -33,8 +33,8 @@ ModRet run_fade(void) {
             if (mode == SSD1315_FB_DISABLE) {
                 mode = SSD1315_SET_FADE_BLINK;
                 ssd1315_command(mode);
-                // TODO: Same thing as blink
-                ssd1315_command(SSD1315_FB_FADE | SSD1315_64_FRAME_FB);
+
+                ssd1315_command(SSD1315_FB_FADE | SSD1315_112_FRAME_FB);
             }
             else {
                 mode = SSD1315_FB_DISABLE;

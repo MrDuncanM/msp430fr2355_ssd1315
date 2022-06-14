@@ -225,6 +225,7 @@ void ssd1315_command(unsigned char);
 void ssd1315_clear(void);
 void ssd1315_position(uint8_t, uint8_t);
 void ssd1315_print(uint8_t, uint8_t, char*);
+void ssd1315_rprint(uint8_t, uint8_t, char*);
 void ssd1315_uint32(uint8_t, uint8_t, uint32_t);
 
 #endif /* SSD1315_H_ */

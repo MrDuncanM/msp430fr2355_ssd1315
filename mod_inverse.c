@@ -20,7 +20,7 @@ ModRet run_inverse(void) {
     ssd1315_command(mode);
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             return MOD_PREV;

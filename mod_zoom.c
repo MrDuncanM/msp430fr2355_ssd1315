@@ -24,13 +24,12 @@ void zoom_print_menu(uint8_t isZoomed) {
 }
 
 ModRet run_zoom(void) {
-
     uint8_t mode = SSD1315_ZOOM_DISABLE;
 
     while (1) {
         zoom_print_menu(mode);
 
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             ssd1315_command(SSD1315_SET_ZOOM);

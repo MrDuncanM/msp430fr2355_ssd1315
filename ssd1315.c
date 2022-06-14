@@ -38,13 +38,18 @@ void ssd1315_init(void) {
     ssd1315_command(0xF1);
     ssd1315_command(SSD1315_SET_VCOM_LEVEL);                            // 0xDB
     ssd1315_command(0x40);
+
     ssd1315_command(SSD1315_ENTIRE_DISPLAY_NORM);                       // 0xA4
+
     ssd1315_command(SD1315_SET_NORMAL_DISP);                            // 0xA6
 
     ssd1315_command(SSD1315_STOP_SCROLL);
 
     ssd1315_command(SSD1315_SET_FADE_BLINK);
     ssd1315_command(SSD1315_FB_DISABLE);
+
+    ssd1315_command(SSD1315_SET_ZOOM);
+    ssd1315_command(SSD1315_ZOOM_DISABLE);
 
     ssd1315_command(SSD1315_SET_DISPLAY_ON);                            //--turn on OLED panel
 }
@@ -101,6 +106,25 @@ void ssd1315_print(uint8_t column, uint8_t page, char* str) {
 
         for (i = 0; i < 5; ++i) {
             SSD1315_BUFFER[i+1] = font_5x7[*str - ' '][i];
+        }
+
+        SSD1315_BUFFER[6] = 0x0;
+
+        i2c_write(SSD1315_I2C_ADDRESS, SSD1315_BUFFER, 7);
+        ++str;
+    }
+}
+
+void ssd1315_rprint(uint8_t column, uint8_t page, char* str) {
+    uint8_t i;
+
+    ssd1315_position(column, page);
+
+    while (*str != '\0') {
+        SSD1315_BUFFER[0] = 0x40;                                       // Mark buffer as data (the command was already sent to move)
+
+        for (i = 0; i < 5; ++i) {
+            SSD1315_BUFFER[5 - i] = font_5x7[*str - ' '][i];
         }
 
         SSD1315_BUFFER[6] = 0x0;

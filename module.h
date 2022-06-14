@@ -21,9 +21,7 @@ typedef enum {
 /*
  * ModuleFunc
  * Modules conform to this entry point and get added to a global list of entry points.
- * Each Module returns -1, 0, or 1 and that will direct the flow to the next module.
- * This could be extended to a Enum definition that would allow modules to return the
- * id of a specific module to transfer to. e.g Menus.
+ * Each Module returns ModRet and that will direct the flow to the next module.
  */
 typedef ModRet (*MODULE_T)(void);
 
@@ -33,7 +31,7 @@ typedef ModRet (*MODULE_T)(void);
 void module_print_menu(void);
 
 /*
- * Module Declarations...?
+ * Module Declarations
  * This is convenient for now but modules may need their own headers.
  */
 ModRet run_menu(void);
@@ -47,5 +45,6 @@ ModRet run_vh_scroll(void);
 ModRet run_fade(void);
 ModRet run_blink(void);
 ModRet run_zoom(void);
+ModRet run_com_scan(void);
 
 #endif /* MODULE_H_ */

@@ -27,7 +27,8 @@ const MODULE_T MODULES[] =
  &run_vh_scroll,
  &run_fade,
  &run_blink,
- &run_zoom
+ &run_zoom,
+ &run_com_scan
 };
 
 const uint8_t MODULE_COUNT = sizeof(MODULES) / sizeof(MODULE_T);

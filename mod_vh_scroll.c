@@ -19,7 +19,7 @@ ModRet run_vh_scroll(void) {
     uint8_t mode = SSD1315_STOP_SCROLL;
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             ssd1315_command(SSD1315_STOP_SCROLL);

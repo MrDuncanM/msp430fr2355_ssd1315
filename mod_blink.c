@@ -17,10 +17,9 @@ ModRet run_blink(void) {
     ssd1315_print(34, 6, "Blink Demo");
 
     uint8_t mode = SSD1315_FB_DISABLE;
-    uint8_t blink_frames = SSD1315_8_FRAME_FB;
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             ssd1315_command(SSD1315_SET_FADE_BLINK);
@@ -33,9 +32,9 @@ ModRet run_blink(void) {
         case BTN_A:
             if (mode == SSD1315_FB_DISABLE) {
                 mode = SSD1315_FB_BLINK;
+
                 ssd1315_command(SSD1315_SET_FADE_BLINK);
-                // TODO: Increment blink frame through all possibilities then disable blink
-                ssd1315_command(mode | blink_frames);
+                ssd1315_command(mode | SSD1315_112_FRAME_FB);
             }
             else {
                 mode = SSD1315_FB_DISABLE;

@@ -29,9 +29,11 @@ typedef enum {
 } HScroll_State;
 
 HScroll_State change_hs_state(HScroll_State curState) {
-    // Note: All of these are transitions to a new state. e.g. HSS_OFF -> HSS_RIGHT_2_FRAMES
+    // Note: This is a state machine. All of these are transitions to a new state. e.g. HSS_OFF -> HSS_RIGHT_2_FRAMES
     HScroll_State retState = HSS_OFF;
 
+    // You need to stop scrolling before updating GDRAM
+    // You can change scrolling without stopping it.
     ssd1315_command(SSD1315_STOP_SCROLL);
 
     if (curState == HSS_LEFT_128_FRAME) {
@@ -138,7 +140,7 @@ ModRet run_h_scroll(void) {
     HScroll_State mode = HSS_OFF;
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             ssd1315_command(SSD1315_STOP_SCROLL);

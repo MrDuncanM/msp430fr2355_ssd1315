@@ -35,6 +35,8 @@ typedef enum {
     BTN_A = 0x4
 } Button;
 
+#define BTN_MASK (BTN_LEFT | BTN_RIGHT | BTN_A)
+
 /*
  * Interface
  */

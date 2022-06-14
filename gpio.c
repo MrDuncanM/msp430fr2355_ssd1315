@@ -148,6 +148,10 @@ void __attribute__ ((interrupt(WDT_VECTOR))) WDT_ISR (void)
 #error Compiler not supported!
 #endif
 {
+    // This has flaws. (hold the button down)
+    // The whole input system would need to be written to track if the button was still down after the WDT
+    //   and not trigger again until it has settled to low. (using a few of the CCR registers in Timer_B7 would make this very efficient with multiple buttons)
+
     // Demonstrate de-bounce (turn red LED off)
     P1OUT &= ~LED1;
     WDTCTL = (WDTPW | WDTHOLD);

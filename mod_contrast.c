@@ -16,12 +16,12 @@ ModRet run_contrast(void) {
     ssd1315_print(0, 4, "MSP430 - SSD1315 OLED");
     ssd1315_print(25, 6, "Contrast Demo");
 
-    uint8_t contrast = SSD1315_DEFAULT_CONTRAST;
+    uint8_t contrast = 0x1;
     ssd1315_command(SSD1315_SET_CONTRAST);
     ssd1315_command(contrast);
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), 0x7)) {
+        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             return MOD_PREV;
