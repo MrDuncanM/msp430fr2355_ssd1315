@@ -24,13 +24,11 @@ ModRet run_contrast(void) {
         switch(__even_in_range(gpio_get_button(), 0x7)) {
         case BTN_NONE: break;
         case BTN_LEFT:
-            gpio_toggle_led1();
             return MOD_PREV;
         case BTN_RIGHT:
-            gpio_toggle_led2();
             return MOD_NEXT;
         case BTN_A:
-            ++contrast;
+            contrast += 0xF;
             if (contrast == 0)
                 contrast = 0x1;
             ssd1315_command(SSD1315_SET_CONTRAST);

@@ -52,6 +52,13 @@ void gpio_toggle_led2(void){
 }
 
 Button gpio_get_button(void) {
+    // Wait for previous de-bounce
+    if (SFRIE1 &= WDTIE)
+        __bis_SR_register(LPM0_bits | GIE);               // Enter LPM0 w/ interrupts
+
+    // Show the de-bounce (green LED on)
+    P6OUT |= LED2;
+
     BUTTON_FLAGS = BTN_NONE;
     P4IE |= BUTTON1;                 // Btn 1 interrupt enable.
     P4IFG = 0;
@@ -76,7 +83,22 @@ void __attribute__ ((interrupt(PORT4_VECTOR))) PORT4_ISR (void)
 #endif
 {
     BUTTON_FLAGS |= BTN_LEFT;
-    P4IFG = 0;
+
+    // Show the de-bounce (red on / green off)
+    P1OUT |= LED1;
+    P6OUT &= ~LED2;
+
+    // Setup WDT interval
+    WDTCTL = WDT_ADLY_250;
+    SFRIFG1 &= ~WDTIFG;
+    SFRIE1 |= WDTIE;
+
+    // Turn  off buttons
+    P2IFG &= ~(BUTTON2 | BUTTON3);
+    P2IE &= ~(BUTTON2 | BUTTON3);
+    P4IFG &= ~BUTTON1;
+    P4IE &= ~BUTTON1;
+
     __bic_SR_register_on_exit(LPM0_bits);     // Exit LPM0
 }
 
@@ -92,13 +114,45 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) PORT2_ISR (void)
     switch(__even_in_range(P2IFG, BUTTON2 | BUTTON3)) {
     case BUTTON2:
         BUTTON_FLAGS |= BTN_RIGHT;
-        P2IFG &= ~BUTTON2;
         break;
     case BUTTON3:
         BUTTON_FLAGS |= BTN_A;
-        P2IFG &= ~BUTTON3;
         break;
     default: break;
     }
+
+    // Show the de-bounce (red on / green off)
+    P1OUT |= LED1;
+    P6OUT &= ~LED2;
+
+    // Setup WDT interval
+    WDTCTL = WDT_ADLY_250;
+    SFRIFG1 &= ~WDTIFG;
+    SFRIE1 |= WDTIE;
+
+    // Turn  off buttons
+    P2IFG &= ~(BUTTON2 | BUTTON3);
+    P2IE &= ~(BUTTON2 | BUTTON3);
+    P4IFG &= ~BUTTON1;
+    P4IE &= ~BUTTON1;
+
+    __bic_SR_register_on_exit(LPM0_bits);     // Exit LPM0
+}
+
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector = WDT_VECTOR
+__interrupt void WDT_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(WDT_VECTOR))) WDT_ISR (void)
+#else
+#error Compiler not supported!
+#endif
+{
+    // Demonstrate de-bounce (turn red LED off)
+    P1OUT &= ~LED1;
+    WDTCTL = (WDTPW | WDTHOLD);
+    SFRIFG1 &= ~WDTIFG;                 /* clear interrupt flag */
+    SFRIE1 &= ~WDTIE;
+
     __bic_SR_register_on_exit(LPM0_bits);     // Exit LPM0
 }

@@ -156,12 +156,12 @@
 #define SSD1315_VH_COL_SCR_NONE             0x0
 #define SSD1315_VH_COL_SCR_ONE              0x1
 
+// Continuous Vertical Scroll
+#define SSD1315_SET_V_SCROLL                0xA3
+
 // Stop/Start Scrolling
 #define SSD1315_STOP_SCROLL                 0x2E
 #define SSD1315_START_SCROLL                0x2F
-
-// Set Vertical Scroll Area
-#define SSD1315_SET_VSCROLL_AREA            0xA3
 
 // Content Scroll Setup
 #define SSD1315_RSCROLL_NOW                 0x2C
@@ -186,8 +186,8 @@
 
 // Mask for Fade / Blink
 #define SSD1315_FB_DISABLE                  0x0
-#define SSD1315_FB_FADE                     0x2
-#define SSD1315_FB_BLINK                    0x3
+#define SSD1315_FB_FADE                     0x20
+#define SSD1315_FB_BLINK                    0x30
 
 // Fade / Blink Interval (Probably in terms of frame frequency)
 #define SSD1315_8_FRAME_FB                  0x0
@@ -212,8 +212,9 @@
  */
 
 // Set Zoom In
-#define SSD1315_DISABLE_ZOOM                0xD6
-#define SSD1315_ENABLE_ZOOM                 0xD7
+#define SSD1315_SET_ZOOM                    0xD6
+#define SSD1315_ZOOM_DISABLE                0x0
+#define SSD1315_ZOOM_ENABLE                 0x1
 
 /*
  * Functions

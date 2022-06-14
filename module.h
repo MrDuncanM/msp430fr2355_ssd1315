@@ -42,6 +42,10 @@ ModRet run_inverse(void);
 ModRet run_all_on(void);
 ModRet run_on_off(void);
 ModRet run_h_scroll(void);
+ModRet run_v_scroll(void);
 ModRet run_vh_scroll(void);
+ModRet run_fade(void);
+ModRet run_blink(void);
+ModRet run_zoom(void);
 
 #endif /* MODULE_H_ */

@@ -43,6 +43,9 @@ void ssd1315_init(void) {
 
     ssd1315_command(SSD1315_STOP_SCROLL);
 
+    ssd1315_command(SSD1315_SET_FADE_BLINK);
+    ssd1315_command(SSD1315_FB_DISABLE);
+
     ssd1315_command(SSD1315_SET_DISPLAY_ON);                            //--turn on OLED panel
 }
 

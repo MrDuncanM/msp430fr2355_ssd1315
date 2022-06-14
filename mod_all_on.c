@@ -24,10 +24,8 @@ ModRet run_all_on(void) {
         switch(__even_in_range(gpio_get_button(), 0x7)) {
         case BTN_NONE: break;
         case BTN_LEFT:
-            gpio_toggle_led1();
             return MOD_PREV;
         case BTN_RIGHT:
-            gpio_toggle_led2();
             return MOD_NEXT;
         case BTN_A:
             mode = (mode == SSD1315_ENTIRE_DISPLAY_NORM ? SSD1315_ENTIRE_DISPLAY_ON : SSD1315_ENTIRE_DISPLAY_NORM);

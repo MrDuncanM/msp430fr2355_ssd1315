@@ -31,9 +31,11 @@ typedef enum {
 HScroll_State change_hs_state(HScroll_State curState) {
     // Note: All of these are transitions to a new state. e.g. HSS_OFF -> HSS_RIGHT_2_FRAMES
     HScroll_State retState = HSS_OFF;
+
+    ssd1315_command(SSD1315_STOP_SCROLL);
+
     if (curState == HSS_LEFT_128_FRAME) {
         retState = HSS_OFF;
-        ssd1315_command(SSD1315_STOP_SCROLL);
     }
     else if (curState < HSS_RIGHT_128_FRAME) {
         ssd1315_command(SSD1315_SET_HORZ_SCROLL_RIGHT);
@@ -134,18 +136,15 @@ ModRet run_h_scroll(void) {
     ssd1315_print(22, 6, "H. Scroll Demo");
 
     HScroll_State mode = HSS_OFF;
-    ssd1315_command(mode);
 
     while (1) {
         switch(__even_in_range(gpio_get_button(), 0x7)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             ssd1315_command(SSD1315_STOP_SCROLL);
-            gpio_toggle_led1();
             return MOD_PREV;
         case BTN_RIGHT:
             ssd1315_command(SSD1315_STOP_SCROLL);
-            gpio_toggle_led2();
             return MOD_NEXT;
         case BTN_A:
             mode = change_hs_state(mode);

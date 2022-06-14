@@ -23,7 +23,11 @@ const MODULE_T MODULES[] =
  &run_all_on,
  &run_on_off,
  &run_h_scroll,
- &run_vh_scroll
+ &run_v_scroll,
+ &run_vh_scroll,
+ &run_fade,
+ &run_blink,
+ &run_zoom
 };
 
 const uint8_t MODULE_COUNT = sizeof(MODULES) / sizeof(MODULE_T);
