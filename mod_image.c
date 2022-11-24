@@ -1,30 +1,34 @@
 /*
- * mod_menu.c
+ * mod_image.c
  *
- *  Created on: Jun 8, 2022
+ *  Created on: Jun 14, 2022
  *      Author: jenkins
  */
 
-#include "module.h"
 
-ModRet run_menu(void) {
+#include "module.h"
+#include "star.h"
+#include "dog.h"
+
+ModRet run_image(void) {
     ssd1315_clear();
 
     module_print_menu();
-    ssd1315_print(34, 1, "[Send NOP]");
+    ssd1315_print(22, 1, "[Toggle Image]");
 
-    ssd1315_print(0, 4, "MSP430 - SSD1315 OLED");
-    ssd1315_print(12, 6, "Demo Applications");
+    uint8_t showingStar = 1;
 
     while (1) {
-        switch(__even_in_range(gpio_get_button(), BTN_MASK)) {
+        ssd1315_img_draw(showingStar ? &STAR : &DOG, 0, 2);
+
+        switch(__even_in_range(gpio_get_button(), 0x7)) {
         case BTN_NONE: break;
         case BTN_LEFT:
             return MOD_PREV;
         case BTN_RIGHT:
             return MOD_NEXT;
         case BTN_A:
-            ssd1315_command(SSD1315_NOP);
+            showingStar = !showingStar;
             break;
         default: break;
         }

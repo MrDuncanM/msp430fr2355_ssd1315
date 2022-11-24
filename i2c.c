@@ -9,11 +9,11 @@
 #include <msp430.h>
 #include "i2c.h"
 
-#define SDA BIT2                                                        // i2c sda pin
-#define SCL BIT3                                                        // i2c scl pin
+#define SDA                                                          // i2c sda pin (P1.2)
+#define SCL BIT3                                                     // i2c scl pin (P1.3)
 
 unsigned char *PTxData;
-unsigned char TXByteCtr;
+unsigned int TXByteCtr;
 
 void i2c_init(void) {
     // Configure USCI_B0 for I2C mode
@@ -24,7 +24,7 @@ void i2c_init(void) {
     UCB0IE |= UCTXIE0 | UCNACKIE;                     // transmit and NACK interrupt enable
 }
 
-void i2c_write(unsigned char slave_address, unsigned char *DataBuffer, unsigned char ByteCtr) {
+void i2c_write(unsigned char slave_address, unsigned char *DataBuffer, unsigned int ByteCtr) {
     while (UCB0CTLW0 & UCTXSTP);                      // Ensure stop condition got sent
 
 

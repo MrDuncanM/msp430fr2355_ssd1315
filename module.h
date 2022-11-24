@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include "gpio.h"
-#include "ssd1315.h"
+#include "ssd1315/ssd1315.h"
 
 typedef enum {
     MOD_PREV = 0x1,
@@ -46,5 +46,6 @@ ModRet run_fade(void);
 ModRet run_blink(void);
 ModRet run_zoom(void);
 ModRet run_com_scan(void);
+ModRet run_image(void);
 
 #endif /* MODULE_H_ */
