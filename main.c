@@ -4,7 +4,7 @@
  * main.c
  *
  *  Created on: Jun 6, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include <msp430.h> 
@@ -29,7 +29,8 @@ const MODULE_T MODULES[] =
  &run_blink,
  &run_zoom,
  &run_com_scan,
- &run_image
+ &run_image,
+ &run_test
 };
 
 const uint8_t MODULE_COUNT = sizeof(MODULES) / sizeof(MODULE_T);

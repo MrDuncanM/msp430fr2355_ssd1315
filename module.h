@@ -2,7 +2,7 @@
  * module.h
  *
  *  Created on: Jun 8, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #ifndef MODULE_H_
@@ -47,5 +47,6 @@ ModRet run_blink(void);
 ModRet run_zoom(void);
 ModRet run_com_scan(void);
 ModRet run_image(void);
+ModRet run_test(void);
 
 #endif /* MODULE_H_ */

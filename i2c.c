@@ -2,7 +2,7 @@
  * i2c.c
  *
  *  Created on: Jun 6, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 
@@ -24,7 +24,7 @@ void i2c_init(void) {
     UCB0IE |= UCTXIE0 | UCNACKIE;                     // transmit and NACK interrupt enable
 }
 
-void i2c_write(unsigned char slave_address, unsigned char *DataBuffer, unsigned int ByteCtr) {
+void i2c_write(unsigned char slave_address, const unsigned char *DataBuffer, unsigned int ByteCtr) {
     while (UCB0CTLW0 & UCTXSTP);                      // Ensure stop condition got sent
 
 
