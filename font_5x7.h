@@ -2,7 +2,7 @@
  * font_5x7.h
  *
  *  Created on: Jun 7, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #ifndef FONT_5X7_H_

@@ -2,7 +2,7 @@
  * clock.h
  *
  *  Created on: Jun 6, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #ifndef CLOCK_H_

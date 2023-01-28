@@ -2,7 +2,7 @@
  * mod_image.c
  *
  *  Created on: Jun 14, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 

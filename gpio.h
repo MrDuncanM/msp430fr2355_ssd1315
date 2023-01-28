@@ -2,7 +2,7 @@
  * gpio.h
  *
  *  Created on: Jun 7, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #ifndef GPIO_H_

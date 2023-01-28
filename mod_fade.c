@@ -2,7 +2,7 @@
  * mod_fade.c
  *
  *  Created on: Jun 12, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include "module.h"

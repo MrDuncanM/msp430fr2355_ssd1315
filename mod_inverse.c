@@ -2,7 +2,7 @@
  * mod_inverse.c
  *
  *  Created on: Jun 10, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include "module.h"

@@ -2,7 +2,7 @@
  * gpio.c
  *
  *  Created on: Jun 7, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include <msp430.h>

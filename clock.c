@@ -2,7 +2,7 @@
  * clock.c
  *
  *  Created on: Jun 6, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include <msp430.h>

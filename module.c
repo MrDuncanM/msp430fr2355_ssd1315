@@ -2,7 +2,7 @@
  * module.c
  *
  *  Created on: Jun 8, 2022
- *      Author: jenkins
+ *      Author: Michael Duncan
  */
 
 #include "module.h"
